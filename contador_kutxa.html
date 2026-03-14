@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Días de servicio activo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    padding: 1.5rem 2rem;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .number-block {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+
+  .number {
+    font-family: 'DM Mono', monospace;
+    font-size: 72px;
+    font-weight: 300;
+    color: #111;
+    line-height: 1;
+    letter-spacing: -3px;
+  }
+
+  .unit {
+    font-size: 15px;
+    font-weight: 400;
+    color: #888;
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+
+  .divider {
+    width: 1px;
+    height: 60px;
+    background: #e0e0e0;
+    flex-shrink: 0;
+  }
+
+  .info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .since {
+    font-size: 12px;
+    color: #aaa;
+    font-weight: 300;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="number-block">
+    <span class="number" id="days">0</span>
+    <span class="unit">días</span>
+  </div>
+  <div class="divider"></div>
+  <div class="info-block">
+    <span class="title"><span class="dot"></span>Servicio activo</span>
+    <span class="since" id="since-label">desde el 5 de febrero de 2026</span>
+  </div>
+</div>
+
+<script>
+  const start = new Date('2026-02-05T00:00:00');
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const diff = Math.max(0, Math.floor((today - start) / 86400000));
+  document.getElementById('days').textContent = diff;
+</script>
+</body>
+</html>
